@@ -25,7 +25,7 @@ SECRET_KEY = 'ux3ll^5o!q20gwm^&4s92c=s#_i@jm1q8aoa8d_yvi0$i1q&pj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['recipe-app-api.herokuapp.com']
 
 
 # Application definition
