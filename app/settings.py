@@ -15,7 +15,7 @@ from decouple import config
 import dj_database_url
 import psycopg2
 #from unipath import Path
-
+import django_heroku
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -134,3 +134,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'app.storage.WhiteNoiseStaticFilesStorage'
 
 AUTH_USER_MODEL = 'core.User'
+
+django_heroku.settings(locals())
