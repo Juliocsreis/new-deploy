@@ -11,27 +11,26 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-from decouple import config
 import dj_database_url
 import psycopg2
-#from unipath import Path
-from dj_database_url import parse as db_url
 
+
+DATABASE_URL = os.environ['DATABASE_URL']
+
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DATABASE_URL = config('DATABASE_URL')
 
-conn = config('conn')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'ux3ll^5o!q20gwm^&4s92c=s#_i@jm1q8aoa8d_yvi0$i1q&pj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
 
 ALLOWED_HOSTS = ['recipe-app-julio.herokuapp.com', '127.0.0.1']
 
@@ -82,14 +81,18 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {'default':config('DATABASE',
-                default={'ENGINE':'django.db.backends.postgresql',
-                        'HOST':os.environ.get('DB_HOST'),
-                        'NAME':os.environ.get('DB_NAME'),
-                        'USER':os.environ.get('DB_USER'),
-                        'PASSWORD':os.environ.get('DB_PASS'),}
-                        )
-}
+DATABASES= {
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)}
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'HOST': os.environ.get('DB_HOST'),
+#        'NAME': os.environ.get('DB_NAME'),
+#        'USER': os.environ.get('DB_USER'),
+#        'PASSWORD': os.environ.get('DB_PASS'),
+#    }
+#}
 
 
 # Password validation
@@ -116,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'America/Sao_Paulo'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
