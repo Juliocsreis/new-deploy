@@ -15,7 +15,7 @@ from decouple import config
 import dj_database_url
 import psycopg2
 #from unipath import Path
-from dj_database_url import parse as db_url
+
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

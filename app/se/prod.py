@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import dj_database_url
 import psycopg2
-
+import django_heroku
 
 DATABASE_URL = os.environ['DATABASE_URL']
 
@@ -137,3 +137,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'app.storage.WhiteNoiseStaticFilesStorage'
 
 AUTH_USER_MODEL = 'core.User'
+
+django_heroku.settings(locals())
